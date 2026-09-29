@@ -1,0 +1,477 @@
+<!doctype html>
+<html lang="el">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#16222E">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Παραγγελίες">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<title>Φύρα – Il Toto Γαλάτσι (demo)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Commissioner:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#EEF2F1;--surface:#FFFFFF;--ink:#16222E;--muted:#5C6975;--line:#D6DEDC;--soft:#E4EBE9;
+--today:#B83A28;--today-bg:#F8E3DF;--tmrw:#946106;--tmrw-bg:#F7EBCF;--ok:#2A7453;--ok-bg:#DDEFE5;
+--gs:#B7791F;--it:#6B4E3D;--kv:#2F6F9F;--ra:#A63A50;--fs:#5E7F2E;--nn:#23827E;--mn:#C4611A;--btn:#16222E;--btn-ink:#FFFFFF;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0F161C;--surface:#172129;--ink:#E6EDF0;--muted:#97A5B0;--line:#2A3843;--soft:#1E2A33;
+--today:#F07A66;--today-bg:#3A1F1B;--tmrw:#E6B04A;--tmrw-bg:#352A14;--ok:#5FC196;--ok-bg:#16301F;--gs:#E0A948;--it:#C49A80;--kv:#6BAEDF;--ra:#E27A8E;--fs:#9CC064;--nn:#55C2BC;--mn:#F0934E;--btn:#E6EDF0;--btn-ink:#0F161C}}
+:root[data-theme="dark"]{--bg:#0F161C;--surface:#172129;--ink:#E6EDF0;--muted:#97A5B0;--line:#2A3843;--soft:#1E2A33;
+--today:#F07A66;--today-bg:#3A1F1B;--tmrw:#E6B04A;--tmrw-bg:#352A14;--ok:#5FC196;--ok-bg:#16301F;--gs:#E0A948;--it:#C49A80;--kv:#6BAEDF;--ra:#E27A8E;--fs:#9CC064;--btn:#E6EDF0;--btn-ink:#0F161C}
+html{scroll-padding-top:env(safe-area-inset-top,0px);height:100%}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Commissioner",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;font-size:16px;line-height:1.45;-webkit-font-smoothing:antialiased}
+.app{max-width:560px;margin:0 auto;padding:18px 16px 110px}
+.top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:18px}
+.store{font-size:13px;color:var(--muted);line-height:1.3}
+.store b{display:block;color:var(--ink);font-size:15px;font-weight:700}
+.lockbtn{appearance:none;border:1px solid var(--line);background:var(--surface);color:var(--muted);font:inherit;font-size:13px;font-weight:700;border-radius:10px;padding:7px 9px;cursor:pointer;display:inline-flex;align-items:center;gap:6px}
+.lockbtn svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round}
+.lockbtn.on{background:var(--ink);color:var(--surface);border-color:var(--ink)}
+h1{font-size:30px;line-height:1.1;font-weight:800;letter-spacing:-.02em;margin:0 0 4px}
+.sub{color:var(--muted);margin:0 0 20px;font-size:15px}
+h2{font-size:17px;font-weight:700;margin:26px 0 10px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px}
+.stack>*+*{margin-top:10px}
+.row{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.muted{color:var(--muted)}.small{font-size:13px}.num{font-variant-numeric:tabular-nums}
+.pill{display:inline-flex;align-items:center;gap:5px;font-size:12.5px;font-weight:600;padding:3px 9px;border-radius:99px;white-space:nowrap}
+.p-today{background:var(--today-bg);color:var(--today)}.p-tmrw{background:var(--tmrw-bg);color:var(--tmrw)}.p-ok{background:var(--ok-bg);color:var(--ok)}.p-n{background:var(--soft);color:var(--muted)}
+.sw{width:10px;height:10px;border-radius:3px;display:inline-block;flex:none}
+.btn{appearance:none;border:0;border-radius:12px;background:var(--btn);color:var(--btn-ink);font:inherit;font-weight:700;padding:14px 16px;cursor:pointer;width:100%;font-size:16px;text-align:center}
+.btn.ghost{background:transparent;color:var(--ink);border:1.5px solid var(--line)}
+.btn.sm{width:auto;padding:9px 13px;font-size:14px;border-radius:10px}
+.btn:focus-visible,.tab:focus-visible,.step button:focus-visible,.chip:focus-visible,a:focus-visible,.lockbtn:focus-visible,.link:focus-visible,.key:focus-visible{outline:3px solid var(--kv);outline-offset:2px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.list{list-style:none;margin:0;padding:0}
+.list li{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:9px 0;border-top:1px solid var(--line)}
+.list li:first-child{border-top:0;padding-top:2px}
+.bigstat{font-size:34px;font-weight:800;letter-spacing:-.02em;line-height:1}
+.seg{display:flex;gap:6px;overflow-x:auto;padding-bottom:2px;margin-bottom:14px}
+.chip{appearance:none;border:1.5px solid var(--line);background:var(--surface);color:var(--ink);font:inherit;font-size:14px;font-weight:600;padding:8px 12px;border-radius:99px;cursor:pointer;white-space:nowrap;display:inline-flex;align-items:center;gap:6px}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--surface);border-color:var(--ink)}
+.item{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px}
+.item h3{margin:0;font-size:15px;font-weight:600;line-height:1.3}
+.orderline{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:8px}
+.step{display:flex;align-items:center;gap:4px;flex:none}
+.step button{appearance:none;width:44px;height:44px;border-radius:12px;border:1.5px solid var(--line);background:var(--bg);color:var(--ink);font:inherit;font-size:22px;font-weight:600;cursor:pointer;line-height:1}
+.qty{min-width:60px;text-align:center;font-size:38px;font-weight:800;letter-spacing:-.03em;line-height:1;font-variant-numeric:tabular-nums}
+.qty small{display:block;font-size:11px;font-weight:600;letter-spacing:0;color:var(--muted);margin-top:3px}
+.explain{font-size:14px;color:var(--muted);line-height:1.4;margin:0}
+.explain b{color:var(--ink)}
+.reason{margin-top:8px;font-size:13.5px;padding:7px 10px;border-radius:9px;line-height:1.35}
+.r-warn{color:var(--today);background:var(--today-bg)}.r-info{color:var(--tmrw);background:var(--tmrw-bg)}.r-n{color:var(--muted);background:var(--soft)}
+.batches{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.msg{white-space:pre-wrap;font-size:14px;background:var(--soft);border-radius:12px;padding:12px;margin:0;font-family:inherit}
+.sendgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.sendgrid a,.sendgrid button{display:flex;justify-content:center;align-items:center;text-decoration:none}
+.task{display:flex;gap:12px;align-items:flex-start}
+.task .when{flex:none;width:58px;font-size:12px;font-weight:700;color:var(--muted);padding-top:2px}
+.task .body{flex:1;min-width:0}
+.task b{display:block;font-size:15.5px;line-height:1.3}
+.task .explain{margin-top:3px}
+.task .act{margin-top:10px;display:flex;gap:8px;flex-wrap:wrap}
+.t-urgent{border-left:5px solid var(--today)}.t-soon{border-left:5px solid var(--tmrw)}.t-norm{border-left:5px solid var(--line)}
+.done{opacity:.6}
+.link{appearance:none;background:none;border:0;padding:0;font:inherit;color:inherit;text-align:left;width:100%;cursor:pointer}
+.collapse{display:flex;justify-content:space-between;align-items:center;font-weight:600}
+.kpis{display:grid;grid-template-columns:1fr;gap:10px}
+.kpi .explain{margin-top:6px}
+.soon{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.soon div{background:var(--surface);border:1.5px dashed var(--line);border-radius:12px;padding:12px;font-size:13px;color:var(--muted);line-height:1.35}
+.soon b{display:block;color:var(--ink);font-size:14px;margin-bottom:3px}
+.scan{text-align:center;padding:30px 14px}
+.scan .frame{width:120px;height:150px;margin:0 auto 14px;border:2px dashed var(--line);border-radius:10px;position:relative;overflow:hidden}
+.scan .frame::after{content:"";position:absolute;left:0;right:0;height:3px;background:var(--kv);top:0;animation:sc 1.2s ease-in-out infinite}
+@keyframes sc{0%{top:4%}50%{top:92%}100%{top:4%}}
+.dots{display:flex;justify-content:center;gap:14px;margin:22px 0 8px}.dots i{width:14px;height:14px;border-radius:50%;border:2px solid var(--ink)}.dots i.f{background:var(--ink)}
+.pad{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;max-width:300px;margin:18px auto 0}
+.key{appearance:none;border:1px solid var(--line);background:var(--surface);color:var(--ink);font:inherit;font-size:24px;font-weight:600;height:62px;border-radius:14px;cursor:pointer}.key.t{font-size:15px;color:var(--muted)}
+.shake{animation:sh .35s}@keyframes sh{25%{transform:translateX(-8px)}75%{transform:translateX(8px)}}
+@media (prefers-reduced-motion:reduce){.scan .frame::after{animation:none;top:50%}.shake{animation:none}}
+.bad{color:var(--today);font-weight:700}
+.tabs{position:fixed;left:0;right:0;bottom:0;background:var(--surface);border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom,0px);z-index:5}
+.tabs nav{max-width:560px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr)}
+.tab{appearance:none;background:none;border:0;font:inherit;color:var(--muted);font-size:12px;font-weight:600;padding:9px 2px 10px;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px;position:relative}
+.tab svg{width:24px;height:24px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.tab[aria-current="page"]{color:var(--ink)}
+.badge{position:absolute;top:5px;left:calc(50% + 8px);background:var(--today);color:#fff;font-size:10px;font-weight:700;min-width:17px;height:17px;border-radius:9px;display:flex;align-items:center;justify-content:center;padding:0 4px}
+.toast{position:fixed;left:50%;bottom:calc(84px + env(safe-area-inset-bottom,0px));transform:translateX(-50%) translateY(20px);background:var(--ink);color:var(--surface);padding:11px 16px;border-radius:12px;font-size:14px;font-weight:600;opacity:0;transition:.25s;pointer-events:none;z-index:9;max-width:90vw}
+.toast.on{opacity:1;transform:translateX(-50%) translateY(0)}
+.note{font-size:12.5px;color:var(--muted);margin-top:10px}
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="top">
+    <div class="store"><b>Il Toto Γαλάτσι</b>Λεωφ. Βεΐκου 14<br>Demo με παραδειγματικά δεδομένα</div>
+    <div id="role"></div>
+  </div>
+  <main id="view"></main>
+</div>
+<div class="tabs" id="tabwrap"><nav id="tabs"></nav></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<input type="file" id="cam" accept="image/*" capture="environment" hidden>
+
+<script>
+/* ===== Βασικά ===== */
+const DAY=864e5,T0=(()=>{const d=new Date();d.setHours(0,0,0,0);return d})(),addD=n=>new Date(T0.getTime()+n*DAY);
+const DN=['Κυρ','Δευ','Τρί','Τετ','Πέμ','Παρ','Σάβ'],DNF=['Κυριακή','Δευτέρα','Τρίτη','Τετάρτη','Πέμπτη','Παρασκευή','Σάββατο'];
+const MON=['Ιανουαρίου','Φεβρουαρίου','Μαρτίου','Απριλίου','Μαΐου','Ιουνίου','Ιουλίου','Αυγούστου','Σεπτεμβρίου','Οκτωβρίου','Νοεμβρίου','Δεκεμβρίου'];
+const fmtD=n=>{const d=addD(n);return DN[d.getDay()]+' '+d.getDate()+'/'+(d.getMonth()+1)};
+const relD=n=>n===0?'σήμερα':n===1?'αύριο':fmtD(n);
+const eur=v=>(v<0?'−':'')+Math.abs(v).toFixed(2).replace('.',',')+' €';
+const eur0=v=>Math.round(v).toLocaleString('el-GR')+' €';
+const sum=a=>a.reduce((x,y)=>x+y,0);
+function rng(s){return()=>{s|=0;s=s+0x6D2B79F5|0;let t=Math.imul(s^s>>>15,1|s);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+const R=rng(20260929);
+
+/* ===== Προμηθευτές & προϊόντα ===== */
+const SUP={
+ gs:{name:'Golden Sandwich',days:[1,2,3,4,5,6],lead:1,cut:'14:00',color:'var(--gs)'},
+ it:{name:'Il Toto κεντρικά',days:[1,4],lead:1,cut:'12:00',color:'var(--it)'},
+ ra:{name:'Red Almond',days:[2,5],lead:1,cut:'13:00',color:'var(--ra)'},
+ fs:{name:'Fystiki Shop',days:[3],lead:2,cut:'15:00',color:'var(--fs)'},
+ nn:{name:'Νουνού',days:[1,3,5],lead:1,cut:'16:00',color:'var(--nn)'},
+ mn:{name:'Μανάβικο',days:[1,2,3,4,5,6],lead:1,cut:'19:00',color:'var(--mn)'},
+ kv:{name:'Κάβα',days:[2,5],lead:1,cut:'18:00',color:'var(--kv)'}};
+const P=[
+ {id:'gs1',s:'gs',n:'Μπαγκέτα σταρένια γαλοπούλα & edam',b:9,cost:1.55,price:2.8,shelf:3,trend:0,combo:'Καφές + Sandwich'},
+ {id:'gs2',s:'gs',n:'Μπαγκέτα ολικής γαλοπούλα & edam',b:5.5,cost:1.6,price:2.8,shelf:3,trend:0,combo:'Καφές + Sandwich'},
+ {id:'gs3',s:'gs',n:'Μπαγκέτα σαλάμι αέρος & γραβιέρα',b:4.2,cost:1.6,price:2.8,shelf:3,trend:-.35,combo:'Καφές + Sandwich'},
+ {id:'gs4',s:'gs',n:'Μπαγκέτα καλαμποκιού κοτόπουλο & παρμεζάνα',b:5,cost:1.75,price:3,shelf:3,trend:.05,combo:'Καφές + Sandwich'},
+ {id:'gs5',s:'gs',n:'Αραβική κοτόπουλο & golden σως',b:6,cost:1.8,price:3.2,shelf:3,trend:.35,combo:'Καφές + Τορτίγια ή Αραβική'},
+ {id:'gs6',s:'gs',n:'Αραβική γαλοπούλα & edam',b:4,cost:1.7,price:3,shelf:3,trend:0,combo:'Καφές + Τορτίγια ή Αραβική'},
+ {id:'ra1',s:'ra',n:'Donut Oreo',b:6,cost:.9,price:2,shelf:3,trend:.1,combo:'Καφές + Donut'},
+ {id:'ra2',s:'ra',n:'Donut πραλίνα φουντουκιού',b:5,cost:.9,price:2,shelf:3,trend:0,combo:'Καφές + Donut'},
+ {id:'ra3',s:'ra',n:'Muffin σοκολάτα με πραλίνα',b:4.5,cost:1.1,price:2.6,shelf:4,trend:-.15,combo:'Καφές + Muffin'},
+ {id:'ra4',s:'ra',n:'Mini Brownies σοκολάτα (6 τεμ.)',b:3,cost:1.1,price:2.1,shelf:10,trend:0},
+ {id:'ra5',s:'ra',n:'Soft Cookies Double (6 τεμ.)',b:2.5,cost:1,price:2.1,shelf:10,trend:0},
+ {id:'nn1',s:'nn',n:"Νουνού Barista's Gold 0% (για αφρόγαλα)",b:25,unit:'λίτρα',cost:1.15,shelf:7,trend:0,use:1,box:12},
+ {id:'nn2',s:'nn',n:"Νουνού Barista's Gold 3,6% (ζεστά και flat white)",b:28,unit:'λίτρα',cost:1.2,shelf:7,trend:0,use:1,box:12},
+ {id:'nn3',s:'nn',n:'Γάλα χωρίς λακτόζη',b:5,unit:'λίτρα',cost:1.45,shelf:7,trend:.1,use:1},
+ {id:'mn1',s:'mn',n:'Πορτοκάλια για φυσικό χυμό',b:10,unit:'κιλά',cost:.95,shelf:6,trend:0,use:1},
+ {id:'fs1',s:'fs',n:'Μπάρα φυστίκι',b:3,pack:1,packN:'τεμ.',cost:1.5,price:3},
+ {id:'fs2',s:'fs',n:'Μπάρα πρωτεΐνης',b:2.5,pack:1,packN:'τεμ.',cost:1.5,price:3},
+ {id:'fs3',s:'fs',n:'Μπάρα φουντούκι-κακάο χωρίς ζάχαρη',b:2,pack:1,packN:'τεμ.',cost:1.5,price:3},
+ {id:'fs4',s:'fs',n:'Μπάρα μπανάνα-καρύδα χωρίς ζάχαρη',b:1.5,pack:1,packN:'τεμ.',cost:1.5,price:3},
+ {id:'it1',s:'it',n:'Blend Il Toto',b:9.5,unit:'κιλά',pack:1,packN:'κιλά',dec:1,cost:18},
+ {id:'it5',s:'it',n:'Single origin Brazil',b:.8,unit:'κιλά',pack:1,packN:'κιλά',dec:1,cost:22},
+ {id:'it6',s:'it',n:'Single origin Ethiopia',b:.6,unit:'κιλά',pack:1,packN:'κιλά',dec:1,cost:22},
+ {id:'it7',s:'it',n:'Single origin Guatemala',b:.5,unit:'κιλά',pack:1,packN:'κιλά',dec:1,cost:22},
+ {id:'it8',s:'it',n:'Single origin Colombia',b:.6,unit:'κιλά',pack:1,packN:'κιλά',dec:1,cost:22},
+ {id:'it9',s:'it',n:'Single origin Costa Rica',b:.5,unit:'κιλά',pack:1,packN:'κιλά',dec:1,cost:22},
+ {id:'it10',s:'it',n:'Single origin El Salvador',b:.4,unit:'κιλά',pack:1,packN:'κιλά',dec:1,cost:22},
+ {id:'it11',s:'it',n:'Decafeine',b:.3,unit:'κιλά',pack:1,packN:'κιλά',dec:1,cost:22},
+ {id:'it12',s:'it',n:'Matcha',b:.25,unit:'κιλά',pack:1,packN:'κιλά',dec:1,cost:60},
+ {id:'it13',s:'it',n:'Σοκολάτα Chioc Il Toto',b:1.2,unit:'κιλά',pack:1,packN:'κιλά',dec:1,cost:12},
+ {id:'it2',s:'it',n:'Ποτήρια bamboo κρύου 16oz',b:520,pack:1000,packN:'κιβ. 1000',cost:80},
+ {id:'it3',s:'it',n:'Ποτήρια bamboo ζεστού 8oz',b:210,pack:1000,packN:'κιβ. 1000',cost:65},
+ {id:'it4',s:'it',n:'Καπάκια κρύου',b:520,pack:1000,packN:'κιβ. 1000',cost:50},
+ {id:'kv1',s:'kv',n:'Νερό 500ml',b:28,pack:24,packN:'κιβ. 24',cost:4.8,price:.6},
+ {id:'kv2',s:'kv',n:'Coca-Cola 330ml',b:9,pack:24,packN:'κιβ. 24',cost:9.6,price:1.7},
+ {id:'kv3',s:'kv',n:'Coca-Cola Zero 330ml',b:7,pack:24,packN:'κιβ. 24',cost:9.6,price:1.7},
+ {id:'kv4',s:'kv',n:'Monster Green 500ml',b:4,pack:12,packN:'κιβ. 12',cost:13.2,price:2.1}];
+const PM=Object.fromEntries(P.map(p=>[p.id,p])),per=p=>!!p.shelf;
+const DOW_S=[.55,1.05,1,1.05,1.1,1.1,.7],DOW_O=[.8,1,1,1,1.05,1.1,.9],COF_PRICE=2.45;
+
+/* ===== Καιρός & αργίες (demo) ===== */
+const WX=[{t:29},{t:31},{t:30},{t:23,rain:1},{t:25},{t:27},{t:28}];
+const HOL=['1-1','1-6','3-25','5-1','8-15','10-28','12-25','12-26'];
+const isHol=n=>{const d=addD(n);return HOL.includes((d.getMonth()+1)+'-'+d.getDate())};
+function wxF(p,n){let f=1;if(n<0)return 1;if(isHol(n))f*=per(p)?.6:.75;const w=WX[n];if(!w)return f;
+ if(p.s==='kv'&&w.t>=30)f*=1.15;if((p.id==='it2'||p.id==='it4')&&w.t>=30)f*=1.1;
+ if(w.rain){if(per(p))f*=.92;if(p.s==='kv')f*=.9}return f}
+function wxWhy(p,from,to){for(let d=from;d<to;d++){if(isHol(d))return`${fmtD(d)} είναι αργία, έρχεται λιγότερος κόσμος`;const w=WX[d];if(!w)continue;
+ if(w.t>=30&&(p.s==='kv'||p.id==='it2'||p.id==='it4'))return`${relD(d)} έχει ζέστη ${w.t}°, πίνονται περισσότερα κρύα`;
+ if(w.rain&&(per(p)||p.s==='kv'))return`${relD(d)} έχει βροχή, έρχεται λιγότερος κόσμος`}return''}
+
+/* ===== Ιστορικό 28 ημερών ===== */
+const H={},W={},COF=[];
+P.forEach(p=>{H[p.id]=[];W[p.id]=[];
+ for(let i=0;i<28;i++){const dw=addD(i-28).getDay(),f=(per(p)?DOW_S:DOW_O)[dw]*(1+(p.trend||0)*(i/27-.5));
+  let v=p.b*f*(.8+.4*R());v=p.dec?Math.round(v*10)/10:Math.round(v);H[p.id].push(v);
+  if(per(p)){const bias=p.id==='gs3'?.3:p.id==='gs2'?.12:0,early=i<14?.12:0;W[p.id].push(R()<.18+bias+early?(R()<.35?2:1):0)}}});
+for(let i=0;i<28;i++)COF.push(Math.round(760*DOW_O[addD(i-28).getDay()]*(.88+.24*R())));
+function avgSame(arr,n){const v=[];for(let k=1;v.length<4&&k<8;k++){const o=n-7*k;if(o>=-28&&o<0)v.push(arr[28+o])}return sum(v)/v.length}
+const trendR=id=>{const h=H[id];return Math.min(1.2,Math.max(.85,sum(h.slice(21))/(sum(h.slice(0,21))/3)))};
+const fc=(id,n)=>avgSame(H[id],n)*trendR(id)*wxF(PM[id],n);
+const revDay=off=>{const i=28+off;return COF[i]*COF_PRICE+sum(P.filter(p=>p.price).map(p=>H[p.id][i]*p.price))};
+
+/* ===== Κατάσταση ===== */
+const S={role:'staff',tab:'home',sup:'gs',adj:{},ap:{kv:{st:'pending',at:'09:12'}},comp:{},showAll:{},check:false,cnt:{},
+ flow:null,rcv:{st:'idle'},b:{},q:{},done:{},alerts:[],pin:false,pinIn:'',last:Date.now(),msgOpen:false,calc:{w:3,cost:1.65,red:30,miss:2,marg:0.95,tNow:30,rate:8}};
+P.forEach(p=>{if(per(p)&&p.shelf>5){const f=fc(p.id,0);const k=p.use?1.7:1;S.b[p.id]=[{e:Math.round(p.shelf/3),q:Math.round(f*.9*k)},{e:p.shelf-1,q:Math.round(f*.6*k*1.5)}];return}if(per(p)){const f=fc(p.id,0);S.b[p.id]=[{e:0,q:Math.max(0,Math.round(f*.25))+(p.id==='gs3'?3:0)},{e:1,q:Math.round(f*.7)},{e:2,q:Math.round(f*.4)}].filter(x=>x.q>0)}});
+Object.assign(S.q,{fs1:12,fs2:5,fs3:9,fs4:4,it1:30,it5:3,it6:1.5,it7:2,it8:1,it9:2,it10:1.5,it11:1,it12:.6,it13:3,it2:2800,it3:1300,it4:3100,kv1:40,kv2:22,kv3:9,kv4:6});
+const stockOf=id=>per(PM[id])?sum(S.b[id].map(x=>x.q)):S.q[id];
+
+/* ===== Πρόβλεψη παραγγελίας ===== */
+function nextOrder(s,from=0){for(let d=from;d<from+14;d++)if(SUP[s].days.includes(addD(d).getDay()))return d}
+function sim(id,until){let bs=S.b[id].map(x=>({...x})).sort((a,b)=>a.e-b.e),waste=0;
+ for(let d=0;d<until;d++){let dem=fc(id,d);for(const x of bs){if(dem<=0)break;if(x.e<d)continue;const t=Math.min(x.q,dem);x.q-=t;dem-=t}
+  for(const x of bs)if(x.e<=d&&x.q>0){waste+=x.q;x.q=0}bs=bs.filter(x=>x.q>.01)}return{bs,waste}}
+function sugg(id){const p=PM[id],sp=SUP[p.s],o=nextOrder(p.s),del=o+sp.lead,o2=nextOrder(p.s,o+1),del2=o2+sp.lead;
+ let dem=0,base=0;for(let d=del;d<del2;d++){dem+=fc(id,d);base+=fc(id,d)/wxF(p,d)}const wx=base?dem/base:1;
+ if(per(p)){const end=Math.min(del2,del+p.shelf);if(end<del2){dem=0;for(let d=del;d<end;d++)dem+=fc(id,d)}
+  const r=sim(id,del),have=Math.round(sum(r.bs.filter(x=>x.e>=del).map(x=>x.q))),raw=Math.max(0,Math.ceil(dem*1.12+.5-have)),need=p.box&&raw?Math.ceil(raw/p.box)*p.box:raw;
+  return{raw,o,del,del2,end,dem,have,wx,need,safe:Math.max(0,raw-Math.max(0,Math.round(dem)-have)),waste:Math.round(r.waste)}}
+ let use=0;for(let d=0;d<del;d++)use+=fc(id,d);const have=Math.max(0,S.q[id]-use);
+ return{o,del,del2,dem,have,wx,need:Math.max(0,Math.ceil((dem*1.15-have)/p.pack)),waste:0}}
+const qtyOf=id=>S.adj[id]??sugg(id).need;
+const fmtN=(p,v)=>p.dec?(Math.round(v*10)/10).toString().replace('.',','):Math.round(v).toLocaleString('el-GR');
+const orderCost=s=>sum(P.filter(p=>p.s===s).map(p=>qtyOf(p.id)*p.cost));
+const expiring=n=>P.filter(per).map(p=>({p,q:sum(S.b[p.id].filter(x=>x.e===n).map(x=>x.q))})).filter(x=>x.q>0);
+const pendingCount=()=>Object.values(S.ap).filter(a=>a.st==='pending').length;
+
+/* Εξήγηση σε απλά ελληνικά */
+function explain(p){const x=sugg(p.id),last=(x.end||x.del2)-1,span=last===x.del?relD(x.del):`${relD(x.del)} έως ${fmtD(last)}`;
+ let main;
+ if(per(p)){const dem=Math.round(x.dem);
+  main=`${p.use?'Θα χρειαστείς':'Θα πουληθούν'} περίπου <b>${dem}${p.unit?' '+p.unit:''}</b> ${span}. Θα έχεις ήδη <b>${x.have}</b> που δεν θα έχουν λήξει`+
+   (x.need===0?`, άρα <b>δεν χρειάζεται</b> παραγγελία.`:dem<=x.have?`, άρα φτάνουν. Βάζουμε μόνο <b>+${x.need}</b> για σιγουριά.`:`, άρα λείπουν ${dem-x.have}`+(x.safe?` και βάζουμε <b>+${x.safe}</b> για σιγουριά.`:`.`));}
+ else{main=`Θα χρειαστείς περίπου <b>${fmtN(p,x.dem)} ${p.unit||'τεμ.'}</b> ${span}. Θα σου έχουν μείνει <b>${fmtN(p,x.have)}</b>`+
+   (x.need===0?`, άρα <b>φτάνουν</b>.`:`, άρα χρειάζεσαι <b>${x.need} ${p.packN}</b> (με ένα μικρό περιθώριο).`);}
+ const rs=[];
+ if(x.waste>0)rs.push(['warn',p.use?`${x.waste} ${p.unit} θα λήξουν πριν χρησιμοποιηθούν. Άνοιξε πρώτα αυτά που λήγουν.`:`${x.waste} ${x.waste===1?'θα λήξει':'θα λήξουν'} πριν πουληθούν. Βάλ' τα μπροστά σήμερα${p.combo?` και πρότεινέ τα με το combo «${p.combo}»`:''}.`]);
+ const wp=Math.round((x.wx-1)*100),why=wxWhy(p,x.del,x.del2);
+ if(Math.abs(wp)>=4&&why)rs.push(['info',`${wp>0?'+':'−'}${Math.abs(wp)}% στην πρόβλεψη: ${why}.`]);
+ if(x.end&&x.end<x.del2)rs.push(['n',`Κρατάει ${p.shelf} μέρες, οπότε υπολογίζουμε μόνο μέχρι ${fmtD(x.end-1)} για να μην πεταχτεί.`]);
+ if(p.box&&x.need)rs.push(['n',`Χρειάζονται ${x.raw} λίτρα, που στρογγυλεύουν σε ${x.need/p.box} ${x.need/p.box===1?'κιβώτιο':'κιβώτια'} των 8 × 1,5 λίτρα (${x.need} λίτρα).`]);
+ if(p.use)rs.push(['n',p.id==='nn1'?'Βγαίνει από τους freddo cappuccino που χτυπάει το ταμείο × ~110 ml αφρόγαλα ο καθένας.':p.id==='nn2'?'Βγαίνει από cappuccino (~150 ml), latte (~200 ml) και flat white (~130 ml) που χτυπάει το ταμείο.':p.id==='nn3'?'Βγαίνει από τα ροφήματα που χτυπήθηκαν «χωρίς λακτόζη» στο ταμείο.':'Βγαίνει από τους φυσικούς χυμούς που χτυπάει το ταμείο × 2–3 πορτοκάλια ο καθένας (~0,4 κιλά).']);
+ const tr=trendR(p.id);if(tr>=1.1)rs.push(['n','Πουλάει περισσότερο τις τελευταίες μέρες, η πρόβλεψη το έχει υπόψη.']);
+ if(tr<=.9)rs.push(['n','Πουλάει λιγότερο τις τελευταίες μέρες, η πρόβλεψη το έχει υπόψη.']);
+ if(S.adj[p.id]!==undefined&&S.adj[p.id]!==x.need)rs.push(['n',`Άλλαξες την πρόταση από ${x.need} σε ${S.adj[p.id]}.`]);
+ return{main,rs,attn:rs.some(r=>r[0]!=='n')||tr>=1.1||tr<=.9||S.adj[p.id]!==undefined}}
+
+const $=s=>document.querySelector(s);
+function toast(t){const el=$('#toast');el.textContent=t;el.classList.add('on');clearTimeout(toast.t);toast.t=setTimeout(()=>el.classList.remove('on'),2400)}
+const nowT=()=>{const d=new Date();return String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0')};
+
+/* ===== ΣΗΜΕΡΑ: λίστα εργασιών ===== */
+function tasks(){const T=[];
+ const ex=expiring(0);if(ex.length)T.push({id:'exp',lvl:'urgent',when:'Τώρα',title:`${sum(ex.filter(x=>!x.p.use).map(x=>x.q))?`Βάλε μπροστά ${sum(ex.filter(x=>!x.p.use).map(x=>x.q))} προϊόντα που λήγουν σήμερα`:'Χρησιμοποίησε πρώτα όσα λήγουν σήμερα'}`,
+  why:`${ex.map(x=>`${x.q}${x.p.unit?' '+x.p.unit:''} ${x.p.n.replace('Μπαγκέτα ','').toLowerCase()}`).join(', ')}. ${ex.some(x=>x.p.use)?'Γάλα και πορτοκάλια: άνοιξε και χρησιμοποίησε πρώτα αυτά που λήγουν. ':''}${ex.filter(x=>!x.p.use).length===0?'':ex.some(x=>x.p.combo)?`Πρότεινέ τα στο ταμείο με τα combo του μενού: ${[...new Set(ex.filter(x=>x.p.combo).map(x=>'«'+x.p.combo+'»'))].join(', ')}.`:'Βάλ\' τα μπροστά στη βιτρίνα.'}`,act:`<button class="btn sm" data-a="done" data-v="exp">Έγινε</button>`});
+
+ const dl=Object.keys(SUP).filter(s=>SUP[s].days.includes(addD(-SUP[s].lead).getDay())&&!S.done['rcv-'+s]);
+ if(dl.length)T.push({id:'rcv',lvl:'soon',when:'Παραλαβές',title:`Παραλαβές σήμερα (${dl.length})`,why:'Όταν έρθει κάθε παραγγελία, βγάλε μια φωτογραφία το δελτίο. Η εφαρμογή περνάει μόνη της τι ήρθε και πότε λήγει, και ελέγχει αν λείπει κάτι.',
+  act:dl.map(s=>`<button class="btn sm ghost" data-a="openRcv" data-v="${s}"><span class="sw" style="background:${SUP[s].color};margin-right:6px"></span>${SUP[s].name}</button>`).join('')});
+ const od=Object.keys(SUP).filter(s=>nextOrder(s)===0&&(!S.ap[s]||S.ap[s].st==='changes'));
+ if(od.length)T.push({id:'ord',lvl:od.some(s=>S.ap[s])?'urgent':'soon',when:'Σήμερα',title:`Παραγγελίες σήμερα (${od.length})`,
+  why:'Η εφαρμογή έχει ετοιμάσει τις ποσότητες. Τις ελέγχεις και τις στέλνεις για έγκριση.'+(od.some(s=>S.ap[s])?' Σε κάποια ο διαχειριστής ζήτησε αλλαγή.':''),
+  act:od.map(s=>`<button class="btn sm ghost" data-a="goOrder" data-v="${s}"><span class="sw" style="background:${SUP[s].color};margin-right:6px"></span>${SUP[s].name}, έως ${SUP[s].cut}</button>`).join('')});
+ Object.keys(SUP).forEach(s=>{const sp=SUP[s],a=S.ap[s];
+  if(a&&a.st==='pending')T.push({id:'wait-'+s,lvl:'norm',when:a.at,title:`${sp.name}: περιμένει έγκριση`,why:'Θα ειδοποιηθείς μόλις την εγκρίνει ο διαχειριστής.',act:''});
+  if(a&&a.st==='approved')T.push({id:'send-'+s,lvl:'urgent',when:'Τώρα',title:`Εγκρίθηκε η παραγγελία ${sp.name}: στείλ' την`,why:'Το μήνυμα είναι έτοιμο. Ένα πάτημα για Viber, WhatsApp ή email.',
+   act:`<button class="btn sm" data-a="goSend" data-v="${s}">Στείλε</button>`});
+  if(a&&a.st==='sent')T.push({id:'sent-'+s,lvl:'norm',when:a.at,title:`${sp.name}: στάλθηκε`,why:'',act:'',isDone:true});
+ });
+ if(Object.keys(SUP).some(s=>S.done['rcv-'+s]))T.push({id:'rcvdone',lvl:'norm',when:'',title:`Παραλήφθηκαν: ${Object.keys(SUP).filter(s=>S.done['rcv-'+s]).map(s=>SUP[s].name).join(', ')}`,why:'',act:'',isDone:true});
+ T.push({id:'check',lvl:'norm',when:'Εβδομάδα',title:'Έλεγχος ψυγείου (μία φορά την εβδομάδα)',why:'Η εφαρμογή σου λέει τι πρέπει να έχεις. Εσύ απλώς επιβεβαιώνεις ή διορθώνεις, για να μένουν σωστές οι προβλέψεις.',
+  act:`<button class="btn sm ghost" data-a="goCheck">Ξεκίνα τον έλεγχο</button>`});
+ return T}
+function vHome(){const d=addD(0),all=tasks(),open=all.filter(t=>!S.done[t.id]&&!t.isDone),fin=all.filter(t=>S.done[t.id]||t.isDone);
+ const card=t=>`<div class="card task t-${t.lvl}"><div class="when">${t.when}</div><div class="body"><b>${t.title}</b>${t.why?`<p class="explain">${t.why}</p>`:''}${t.act?`<div class="act">${t.act}</div>`:''}</div></div>`;
+ let w0=0,we=0;P.filter(per).forEach(p=>{for(let i=21;i<28;i++){w0+=W[p.id][i];we+=W[p.id][i]*p.cost}});
+ return`<h1>Σήμερα</h1><p class="sub">${DNF[d.getDay()]} ${d.getDate()} ${MON[d.getMonth()]}. ${open.length?`Έχεις ${open.length} ${open.length===1?'πράγμα':'πράγματα'} να κάνεις.`:'Όλα έγιναν.'}</p>
+ <div class="stack">${open.map(card).join('')||'<div class="card">Τίποτα άλλο για σήμερα.</div>'}</div>
+ ${fin.length?`<h2>Έγιναν</h2><div class="stack">${fin.map(t=>`<div class="card task t-norm done"><div class="when">✓</div><div class="body"><b>${t.title}</b></div></div>`).join('')}</div>`:''}
+ <h2>Φύρα τελευταίων 7 ημερών</h2><div class="card"><div class="bigstat num">${eur(we)}</div>
+ <p class="explain" style="margin-top:6px">${w0} σάντουιτς και γλυκά έληξαν χωρίς να πουληθούν. Υπολογίζεται μόνο του: ό,τι παραλήφθηκε, δεν πουλήθηκε στο ταμείο και πέρασε η λήξη του.</p></div>`}
+
+/* ===== ΠΑΡΑΓΓΕΛΙΑ ===== */
+function itemCard(p){const x=sugg(p.id),q=qtyOf(p.id),e=explain(p),u=per(p)?(p.unit||'τεμ.'):p.packN;
+ return`<div class="item"><h3>${p.n}</h3><div class="orderline"><p class="explain">${e.main}</p>
+ <div class="step"><button data-a="dec" data-v="${p.id}" aria-label="Λιγότερα">−</button><div class="qty">${q}<small>${u}</small></div><button data-a="inc" data-v="${p.id}" aria-label="Περισσότερα">+</button></div></div>
+ ${e.rs.map(r=>`<div class="reason r-${r[0]}">${r[1]}</div>`).join('')}
+ ${S.adj[p.id]!==undefined&&S.adj[p.id]!==x.need?`<div style="margin-top:8px"><button class="btn sm ghost" data-a="reset" data-v="${p.id}">Επαναφορά στο ${x.need}</button></div>`:''}</div>`}
+function vOrder(){const s=S.sup,sp=SUP[s],items=P.filter(p=>p.s===s),g=sugg(items[0].id),a=S.ap[s];
+ const head=`<h1>Παραγγελία</h1><div class="seg">${Object.keys(SUP).map(k=>`<button class="chip" data-a="sup" data-v="${k}" aria-pressed="${k===s}"><span class="sw" style="background:${SUP[k].color}"></span>${SUP[k].name}</button>`).join('')}</div>
+ <p class="sub">${g.o===0?`Στέλνεται σήμερα έως ${sp.cut}`:`Επόμενη παραγγελία ${fmtD(g.o)}`}, έρχεται ${relD(g.del)} και πρέπει να φτάσει μέχρι την επόμενη παράδοση (${fmtD(g.del2)}).</p>`;
+ if(S.comp[s])return head+vCompose(s,g);
+ const attn=items.filter(p=>explain(p).attn),rest=items.filter(p=>!explain(p).attn);
+ let foot;
+ if(!a||a.st==='changes')foot=`${a?`<div class="reason r-warn" style="margin:0 0 10px">Ο διαχειριστής ζήτησε αλλαγή: ${a.note}</div>`:''}<button class="btn" data-a="askApprove">Στείλε για έγκριση</button><p class="note">Καμία παραγγελία δεν φεύγει μόνη της. Την εγκρίνει ο διαχειριστής και τη στέλνεις εσύ.</p>`;
+ else if(a.st==='pending')foot=`<div class="card"><b>Περιμένει έγκριση</b><p class="explain" style="margin-top:4px">Στάλθηκε στον διαχειριστή στις ${a.at}. Θα ειδοποιηθείς μόλις εγκριθεί.</p></div>`;
+ else if(a.st==='approved')foot=`<button class="btn" data-a="compose">Εγκρίθηκε. Ετοίμασε το μήνυμα</button>`;
+ else foot=`<button class="btn ghost" data-a="compose">Στάλθηκε. Ξαναστείλε</button>`;
+ return head+`
+ ${attn.length?`<h2 style="margin-top:6px">Θέλουν την προσοχή σου (${attn.length})</h2><div class="stack">${attn.map(itemCard).join('')}</div>`:''}
+ ${rest.length?`<h2>Όπως συνήθως (${rest.length})</h2>
+  ${S.showAll[s]?`<div class="stack">${rest.map(itemCard).join('')}</div><div style="margin-top:8px"><button class="btn sm ghost" data-a="toggleAll">Κλείσε</button></div>`
+  :`<div class="card"><button class="link collapse" data-a="toggleAll"><span>${rest.map(p=>`${p.n.replace('Μπαγκέτα ','')}: <b class="num">${qtyOf(p.id)}</b>`).join('<br>')}</span><span class="small muted" style="flex:none;margin-left:10px">Άνοιξε ›</span></button>
+  <p class="explain" style="margin-top:8px">Για αυτά δεν αλλάζει τίποτα από τα συνηθισμένα. Άνοιξέ τα αν θες να δεις την εξήγηση ή να αλλάξεις κάτι.</p></div>`}`:''}
+ <div class="card row" style="margin-top:16px"><span>Κόστος παραγγελίας</span><b class="num">${eur(orderCost(s))}</b></div>
+ <div style="margin-top:12px">${foot}</div>`}
+function msgText(s,g){const lines=P.filter(p=>p.s===s).map(p=>[p,qtyOf(p.id)]).filter(x=>x[1]>0).map(([p,q])=>`• ${p.n}: ${q}${per(p)?'':' '+p.packN}`).join('\n');
+ return`Καλημέρα! Παραγγελία από Il Toto Γαλάτσι (Λεωφ. Βεΐκου 14) για ${fmtD(g.del)}:\n\n${lines}\n\nΕυχαριστώ!`}
+function vCompose(s,g){const t=msgText(s,g),e=encodeURIComponent(t);S.lastMsg=t;
+ return`<div class="card"><pre class="msg">${t}</pre></div><h2>Στείλε με</h2><div class="sendgrid">
+ <a class="btn" href="viber://forward?text=${e}" data-a="sent">Viber</a><a class="btn" href="https://wa.me/?text=${e}" target="_blank" rel="noopener" data-a="sent">WhatsApp</a>
+ <a class="btn ghost" href="mailto:?subject=${encodeURIComponent('Παραγγελία Il Toto Γαλάτσι')}&body=${e}" data-a="sent">Email</a><button class="btn ghost" data-a="copy">Αντιγραφή</button></div>
+ <div style="margin-top:12px"><button class="btn ghost" data-a="back">Πίσω στις ποσότητες</button></div>`}
+
+/* ===== ΨΥΓΕΙΟ ===== */
+function vFridge(){const sand=P.filter(per),other=P.filter(p=>!per(p)),pc=e=>e<=0?'p-today':e===1?'p-tmrw':'p-ok';
+ const sc=sand.map(p=>{const tot=stockOf(p.id);
+  const body=S.check?`<div class="orderline"><span class="explain">Η εφαρμογή υπολογίζει <b>${tot}</b>. Μέτρα και διόρθωσε.</span><div class="step"><button data-a="cdec" data-v="${p.id}" aria-label="Λιγότερα">−</button><div class="qty" style="font-size:30px">${S.cnt[p.id]??tot}</div><button data-a="cinc" data-v="${p.id}" aria-label="Περισσότερα">+</button></div></div>`
+  :`<div class="batches">${S.b[p.id].slice().sort((a,b)=>a.e-b.e).map(x=>`<span class="pill ${pc(x.e)} num">${x.q} λήγουν ${relD(x.e)}</span>`).join('')||'<span class="small muted">Άδειο</span>'}</div>`;
+  return`<div class="item"><div class="row"><h3>${p.n}</h3>${S.check?'':`<b class="num" style="font-size:20px">${tot}${p.unit?' <span class="small muted">'+p.unit+'</span>':''}</b>`}</div>${body}</div>`}).join('');
+ const oc=other.map(p=>{let use=0,d=0;while(use<S.q[p.id]&&d<60){use+=fc(p.id,d);d++}
+  return`<li><div>${p.n}<div class="small muted">φτάνει για περίπου ${Math.max(0,d-1)} μέρες</div></div><b class="num">${fmtN(p,S.q[p.id])} ${p.unit||'τεμ.'}</b></li>`}).join('');
+ return`<h1>Ψυγείο & βιτρίνα</h1><p class="sub">${S.check?'Εβδομαδιαίος έλεγχος: μέτρα ό,τι βλέπεις και διόρθωσε μόνο όπου διαφέρει.':'Δεν χρειάζεται να το ενημερώνεις. Υπολογίζεται μόνο του: ό,τι παραλήφθηκε, μείον ό,τι πουλήθηκε στο ταμείο.'}</p>
+ <div class="legend small muted" style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px">${S.check?'':'<span class="pill p-today">λήγει σήμερα</span><span class="pill p-tmrw">λήγει αύριο</span><span class="pill p-ok">φρέσκο</span>'}</div>
+ <div class="stack">${sc}</div>
+ <div style="margin-top:14px">${S.check?'<button class="btn" data-a="checkSave">Τελείωσα τον έλεγχο</button>':''}</div>
+ <h2>Αποθήκη και ράφι</h2><div class="card"><ul class="list">${oc}</ul><p class="note">Το «φτάνει για» υπολογίζεται από την πρόβλεψη πωλήσεων των επόμενων ημερών.</p></div>`}
+
+/* ===== ΠΑΡΑΛΑΒΗ (ανοίγει από εργασία) ===== */
+function vRcv(){const r=S.rcv,s=r.sup,sp=SUP[s];
+ const head=`<button class="btn sm ghost" data-a="closeFlow" style="margin-bottom:14px">‹ Πίσω</button><h1>Παραλαβή</h1><p class="sub">${sp.name}</p>`;
+ if(r.st==='scan')return head+`<div class="card scan"><div class="frame"></div><b>Διαβάζω το δελτίο…</b><p class="small muted">Είδη, ποσότητες και ημερομηνίες λήξης</p></div>`;
+ if(r.st==='done')return head+`<p class="explain" style="margin-bottom:12px">Αυτά διάβασα στο δελτίο <b>${r.no}</b>. Μέτρα τι ήρθε πραγματικά και διόρθωσε αν κάτι λείπει. Ό,τι λείπει το βλέπει αυτόματα ο διαχειριστής.</p>
+  <div class="card"><ul class="list">${r.lines.map((l,i)=>{const p=PM[l.id];return`<li><div>${p.n}<div class="small muted">${per(p)?'Λήγει '+fmtD(p.shelf)+(p.unit?', σε '+p.unit:''):p.packN}${l.q!==l.ord?` <span class="bad">παραγγέλθηκαν ${l.ord}</span>`:''}</div></div>
+  <div class="step"><button data-a="rdec" data-v="${i}" aria-label="Λιγότερα">−</button><div class="qty" style="font-size:24px;min-width:40px">${l.q}</div><button data-a="rinc" data-v="${i}" aria-label="Περισσότερα">+</button></div></li>`}).join('')}</ul></div>
+  <div class="stack" style="margin-top:12px"><button class="btn" data-a="rsave">Όλα σωστά, καταχώρησε</button></div>`;
+ return head+`<p class="explain" style="margin-bottom:14px">Βγάλε μια φωτογραφία το δελτίο αποστολής ή το τιμολόγιο. Η εφαρμογή βρίσκει μόνη της τα είδη, τις ποσότητες και πότε λήγει το καθένα.</p>
+ <div class="stack"><button class="btn" data-a="photo">Άνοιξε την κάμερα</button><button class="btn ghost" data-a="sample">Δοκίμασε με παράδειγμα</button></div>`}
+function startScan(){S.rcv.st='scan';render();setTimeout(()=>{const s=S.rcv.sup;
+ S.rcv.lines=P.filter(p=>p.s===s).map(p=>{const o=Math.max(per(p)?2:1,sugg(p.id).need);return{id:p.id,ord:o,q:o}});
+ S.rcv.no=(s==='gs'?'ΔΑ ':s==='it'?'ΤΔΑ ':'ΤΙΜ ')+(48600+Math.floor(R()*300));S.rcv.st='done';render()},1500)}
+
+/* ===== ADMIN: μία οθόνη ===== */
+function vAdmin(){const y=-1,rev=revDay(y),prev=revDay(-8),dp=Math.round((rev-prev)/prev*100);
+ let wq=0,we=0,wq1=0,we1=0;P.filter(per).forEach(p=>{for(let i=21;i<28;i++){wq+=W[p.id][i];we+=W[p.id][i]*p.cost}for(let i=14;i<21;i++){wq1+=W[p.id][i];we1+=W[p.id][i]*p.cost}});
+ const wd=we1?Math.round((we-we1)/we1*100):0,pend=Object.keys(S.ap).filter(s=>S.ap[s].st==='pending');
+ const worst=P.filter(per).map(p=>{const s=sum(H[p.id]),w=sum(W[p.id]);return{p,r:w/(s+w)}}).sort((a,b)=>b.r-a.r)[0];
+ const att=[...S.alerts];if(worst.r>.12)att.push(`«${worst.p.n}»: πετιέται το ${Math.round(worst.r*100)}%. Η εφαρμογή ήδη προτείνει λιγότερα τεμάχια.`);
+ const cards=pend.map(s=>{const lines=P.filter(p=>p.s===s);return`<div class="card"><div class="row"><div class="row" style="gap:8px;justify-content:flex-start"><span class="sw" style="background:${SUP[s].color}"></span><b>${SUP[s].name}</b></div><span class="small muted">${S.ap[s].at}</span></div>
+ <ul class="list" style="margin-top:8px">${lines.map(p=>{const x=sugg(p.id),q=qtyOf(p.id),e=explain(p);return`<li style="align-items:flex-start"><div><b style="font-weight:600">${p.n}</b><p class="explain small" style="margin-top:2px">${e.main}</p>${e.rs.filter(r=>r[0]!=='n').map(r=>`<div class="reason r-${r[0]}">${r[1]}</div>`).join('')}</div>
+ <div class="step"><button data-a="dec" data-v="${p.id}" aria-label="Λιγότερα">−</button><div class="qty" style="font-size:24px;min-width:40px">${q}</div><button data-a="inc" data-v="${p.id}" aria-label="Περισσότερα">+</button></div></li>`}).join('')}</ul>
+ <div class="row" style="margin:10px 0"><span>Σύνολο</span><b class="num" style="font-size:20px">${eur(orderCost(s))}</b></div>
+ <div class="two"><button class="btn" data-a="approve" data-v="${s}">Εγκρίνω</button><button class="btn ghost" data-a="changes" data-v="${s}">Ζήτα αλλαγή</button></div></div>`}).join('');
+ const msg=`Il Toto Γαλάτσι, ${fmtD(y)}\nΤζίρος: ${eur0(rev)} (${dp>=0?'+':''}${dp}%)\nΦύρα εβδομάδας: ${eur(we)}\n${pend.length?`Περιμένουν έγκριση: ${pend.length}`:'Δεν περιμένει τίποτα την έγκρισή σου.'}`;
+ return`<h1>Admin</h1><p class="sub">Όλα όσα χρειάζεσαι σε μία οθόνη.</p>
+ <div class="kpis">
+ <div class="card kpi"><div class="small muted">Τζίρος χθες</div><div class="row" style="align-items:flex-end"><div class="bigstat num">${eur0(rev)}</div><span class="pill ${dp>=0?'p-ok':'p-today'} num">${dp>=0?'+':''}${dp}%</span></div>
+ <p class="explain">Σε σύγκριση με την ίδια μέρα της προηγούμενης εβδομάδας (${eur0(prev)}). Από τα δεδομένα του ταμείου.</p></div>
+ <div class="card kpi"><div class="small muted">Φύρα 7 ημερών</div><div class="row" style="align-items:flex-end"><div class="bigstat num">${eur(we)}</div><span class="pill ${wd<=0?'p-ok':'p-today'} num">${wd>0?'+':''}${wd}%</span></div>
+ <p class="explain">${wq} σάντουιτς και γλυκά έληξαν χωρίς να πουληθούν, σε κόστος αγοράς. Την προηγούμενη εβδομάδα ήταν ${eur(we1)}.</p></div>
+ </div>
+ <h2>Περιμένουν την έγκρισή σου (${pend.length})</h2>
+ ${cards?`<div class="stack">${cards}</div><p class="note">Κάθε ποσότητα έχει την εξήγησή της. Αλλάζεις ό,τι θέλεις πριν εγκρίνεις.</p>`:'<div class="card"><p class="explain">Δεν υπάρχει καμία παραγγελία για έγκριση.</p></div>'}
+ ${att.length?`<h2>Καλό να ξέρεις</h2><div class="stack">${att.map(t=>`<div class="card task t-soon"><div class="body"><p class="explain" style="color:var(--ink)">${t}</p></div></div>`).join('')}</div>`:''}
+ <h2>Κάθε βράδυ στο κινητό σου</h2><div class="card"><p class="explain">Στις 21:15 σου έρχεται σύνοψη στο Viber, χωρίς να ανοίξεις την εφαρμογή.</p>
+ ${S.msgOpen?`<pre class="msg" style="margin-top:10px">${msg}</pre>`:''}<div style="margin-top:10px"><button class="btn sm ghost" data-a="msgToggle">${S.msgOpen?'Κλείσε':'Δες παράδειγμα'}</button></div></div>
+ <h2>Συνταγές</h2><div class="card"><p class="explain">Από αυτές βγαίνει πόσο γάλα και πόσα πορτοκάλια χρειάζεσαι, με βάση ό,τι χτυπάει το ταμείο.</p>
+ ${S.recOpen?`<div style="overflow-x:auto;margin-top:10px"><table style="width:100%;border-collapse:collapse;font-size:13.5px">${RECIPES.map(r=>`<tr><td style="padding:7px 4px;border-top:1px solid var(--line)">${r[0]}</td><td style="padding:7px 4px;border-top:1px solid var(--line);text-align:right;white-space:nowrap"><b>${r[1]}</b></td></tr>`).join('')}</table></div>
+ <p class="note">Προεπιλογές από δημόσιες συνταγές barista. Αντικαθίστανται με τις επίσημες συνταγές της Il Toto, μία φορά για όλα τα καταστήματα.</p>`:''}
+ <div style="margin-top:10px"><button class="btn sm ghost" data-a="recToggle">${S.recOpen?'Κλείσε':'Δες τις συνταγές'}</button></div></div>
+ <h2>Πόσα γλιτώνεις</h2><button class="card link task t-soon" data-a="openCalc"><div class="body"><b>Υπολογισμός εξοικονόμησης</b><p class="explain">Βάλε τα δικά σου νούμερα και δες πόσα κερδίζεις τον μήνα.</p></div><span aria-hidden="true" style="font-size:20px">›</span></button>
+ <h2>Σύντομα</h2><div class="soon">
+ <div><b>Κέρδος ανά προϊόν</b>Τι σου αφήνει κάθε σάντουιτς μετά από κόστος, ΦΠΑ και φύρα.</div>
+ <div><b>Έλεγχος τιμολογίων</b>Εντοπίζει χρεώσεις για ό,τι δεν ήρθε και αυξήσεις τιμών.</div>
+ <div><b>Βάρδιες</b>Πόσα άτομα χρειάζεσαι κάθε ώρα, από την κίνηση του ταμείου.</div>
+ <div><b>Θερμοκρασίες HACCP</b>Ψηφιακό ημερολόγιο ψυγείων, έτοιμο για έλεγχο.</div>
+ <div style="grid-column:1/-1"><b>Για τα κεντρικά της Il Toto</b>Πρόβλεψη καφέ ανά ποικιλία για όλο το δίκτυο, ώστε το εργοστάσιο να ξέρει τι και πόσο να καβουρδίσει, και σύγκριση φύρας ανάμεσα στα καταστήματα.</div></div>`}
+
+const RECIPES=[['Freddo cappuccino (αφρόγαλα, Barista\'s Gold 0%)','~110 ml'],['Cappuccino ζεστός','~150 ml'],['Latte / Cappuccino latte','~200 ml'],['Flat white (Barista\'s Gold 3,6%)','~130 ml'],['Freddo espresso / Espresso','0 ml'],['Φυσικός χυμός πορτοκάλι','2–3 πορτοκάλια (~0,4 κιλά)']];
+const CF=[
+ {k:'w',l:'Σάντουιτς και γλυκά που πετιούνται τη μέρα',u:'τεμ.',st:1,min:0,max:40},
+ {k:'cost',l:'Μέσο κόστος αγοράς ανά τεμάχιο',u:'€',st:.05,min:.5,max:5,m:1},
+ {k:'red',l:'Πόσο μειώνεται η φύρα με την εφαρμογή',u:'%',st:5,min:0,max:80},
+ {k:'miss',l:'Φορές τη μέρα που ζητήθηκε κάτι και είχε τελειώσει',u:'φορές',st:1,min:0,max:40},
+ {k:'marg',l:'Μέσο κέρδος ανά τεμάχιο που πουλιέται',u:'€',st:.05,min:0,max:5,m:1},
+ {k:'tNow',l:'Λεπτά τη μέρα για παραγγελίες και έλεγχο αποθέματος σήμερα',u:'λεπτά',st:5,min:0,max:180},
+ {k:'rate',l:'Κόστος εργασίας ανά ώρα',u:'€',st:.5,min:3,max:30,m:1}];
+function calcRes(){const c=S.calc,D=30,waste=c.w*c.cost*c.red/100*D,sales=c.miss*.5*c.marg*D,time=Math.max(0,c.tNow-5)/60*c.rate*D;return{waste,sales,time,tot:waste+sales+time}}
+function vCalc(){const c=S.calc,r=calcRes(),fv=(f,v)=>f.m?v.toFixed(2).replace('.',','):v;
+ return`<button class="btn sm ghost" data-a="closeFlow" style="margin-bottom:14px">‹ Πίσω</button><h1>Πόσα γλιτώνεις</h1><p class="sub">Άλλαξε τα νούμερα με τα δικά σου. Ο υπολογισμός γίνεται αμέσως.</p>
+ <div class="card"><div class="small muted">Εξοικονόμηση τον μήνα</div><div class="bigstat num" style="font-size:44px">${eur0(r.tot)}</div><p class="explain" style="margin-top:6px">Περίπου <b>${eur0(r.tot*12)}</b> τον χρόνο για αυτό το κατάστημα.</p></div>
+ <div class="stack" style="margin-top:10px">
+ <div class="card"><div class="row"><b>Λιγότερη φύρα</b><b class="num">${eur0(r.waste)}</b></div><p class="explain">${c.w} τεμάχια × ${fv({m:1},c.cost)} € × ${c.red}% λιγότερα × 30 μέρες.</p></div>
+ <div class="card"><div class="row"><b>Λιγότερα «τελείωσε»</b><b class="num">${eur0(r.sales)}</b></div><p class="explain">Αν η εφαρμογή σώσει τις μισές από τις ${c.miss} χαμένες πωλήσεις τη μέρα, με ${fv({m:1},c.marg)} € κέρδος η καθεμία.</p></div>
+ <div class="card"><div class="row"><b>Χρόνος προσωπικού</b><b class="num">${eur0(r.time)}</b></div><p class="explain">Από ${c.tNow} λεπτά τη μέρα σε περίπου 5 με την εφαρμογή, με ${fv({m:1},c.rate)} €/ώρα.</p></div></div>
+ <h2>Τα νούμερά σου</h2><div class="card"><ul class="list">${CF.map(f=>`<li><span class="small" style="flex:1">${f.l}</span><div class="step"><button data-a="cde" data-v="${f.k}" aria-label="Λιγότερο">−</button><div class="qty" style="font-size:20px;min-width:62px">${fv(f,c[f.k])}<small>${f.u}</small></div><button data-a="cin" data-v="${f.k}" aria-label="Περισσότερο">+</button></div></li>`).join('')}</ul></div>
+ <div class="card" style="margin-top:10px"><div class="row"><b>Λιγότερα τρόφιμα στα σκουπίδια</b><b class="num">~${Math.round(c.w*.18*c.red/100*30)} κιλά</b></div><p class="explain">Τον μήνα, με περίπου 180 γρ. ανά τεμάχιο. Ταιριάζει με τη φιλοσοφία βιωσιμότητας της Il Toto (bamboo ποτήρια, βιολογικές φάρμες, fair trade).</p></div>
+ <h2>Αν μπει σε όλο το δίκτυο</h2><div class="card"><div class="bigstat num">${eur0(r.tot*12*250)}</div><p class="explain" style="margin-top:6px">Τον χρόνο, αν τα 250 καταστήματα που στοχεύει η Il Toto είχαν παρόμοια νούμερα. Είναι ενδεικτικό: κάθε μαγαζί έχει άλλη κίνηση.</p></div>
+ <p class="note">Τα προεπιλεγμένα νούμερα είναι εκτιμήσεις για το demo. Στο πιλοτικό θα μετρηθούν τα πραγματικά.</p>`}
+function vPin(){return`<h1>Admin</h1><p class="sub">Βάλε τον κωδικό για να μπεις.</p>
+ <div class="dots ${S.pinErr?'shake':''}" aria-label="${S.pinIn.length} από 4 ψηφία">${[0,1,2,3].map(i=>`<i class="${i<S.pinIn.length?'f':''}"></i>`).join('')}</div>
+ <p class="small" style="text-align:center;min-height:20px;margin:0" role="alert">${S.pinErr?'<span class="bad">Λάθος κωδικός</span>':''}</p>
+ <div class="pad">${'123456789'.split('').map(k=>`<button class="key" data-a="key" data-v="${k}">${k}</button>`).join('')}<button class="key t" data-a="key" data-v="cancel">Άκυρο</button><button class="key" data-a="key" data-v="0">0</button><button class="key t" data-a="key" data-v="del" aria-label="Διαγραφή">⌫</button></div>
+ <p class="note" style="text-align:center;margin-top:18px">Demo κωδικός: 1234. Αποσύνδεση αυτόματα μετά από 5 λεπτά χωρίς χρήση.</p>`}
+
+/* ===== Πλοήγηση ===== */
+const ICON={home:'<path d="M9 6h11M9 12h11M9 18h11"/><path d="M4 6l1 1 2-2M4 12l1 1 2-2M4 18l1 1 2-2"/>',
+ order:'<path d="M6 3h12v18l-3-2-3 2-3-2-3 2z"/><path d="M9 8h6M9 12h6"/>',
+ fridge:'<rect x="5" y="2.5" width="14" height="19" rx="2"/><path d="M5 10h14M8.5 6v2M8.5 13v3"/>'};
+const TABS=[['home','Σήμερα'],['order','Παραγγελία'],['fridge','Ψυγείο']];
+const LOCK='<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>';
+function render(){
+ const v=S.pin?vPin():S.role==='owner'?(S.flow==='calc'?vCalc():vAdmin()):S.flow==='rcv'?vRcv():({home:vHome,order:vOrder,fridge:vFridge})[S.tab]();
+ $('#view').innerHTML=v;
+ $('#role').innerHTML=S.role==='owner'?`<button class="lockbtn on" data-a="logout">${LOCK}Έξοδος</button>`:`<button class="lockbtn" data-a="pin" aria-label="Είσοδος διαχειριστή">${LOCK}</button>`;
+ $('#tabwrap').style.display=S.role==='owner'||S.pin?'none':'';
+ const open=tasks().filter(t=>!S.done[t.id]&&!t.isDone).length;
+ $('#tabs').innerHTML=TABS.map(([k,l])=>`<button class="tab" data-a="tab" data-v="${k}" ${S.tab===k&&!S.flow?'aria-current="page"':''}><svg viewBox="0 0 24 24" aria-hidden="true">${ICON[k]}</svg>${k==='home'&&open?`<span class="badge">${open}</span>`:''}<span>${l}</span></button>`).join('')}
+const go=t=>{S.tab=t;S.flow=null;render();window.scrollTo(0,0)};
+const ADMIN_PIN='1234',IDLE_MS=5*60*1000;
+setInterval(()=>{if(S.role==='owner'&&Date.now()-S.last>IDLE_MS){S.role='staff';S.tab='home';render();toast('Αποσύνδεση λόγω αδράνειας')}},15000);
+
+document.addEventListener('click',e=>{S.last=Date.now();const t=e.target.closest('[data-a]');if(!t)return;const a=t.dataset.a,v=t.dataset.v;
+ switch(a){
+ case'tab':S.check=false;go(v);return;
+ case'pin':S.pin=true;S.pinIn='';S.pinErr=false;render();window.scrollTo(0,0);return;
+ case'key':if(v==='del')S.pinIn=S.pinIn.slice(0,-1);else if(v==='cancel'){S.pin=false;break}else if(S.pinIn.length<4)S.pinIn+=v;S.pinErr=false;
+  if(S.pinIn.length===4){if(S.pinIn===ADMIN_PIN){S.pin=false;S.role='owner';render();window.scrollTo(0,0);toast('Συνδέθηκες ως admin');return}S.pinErr=true;S.pinIn=''}break;
+ case'logout':S.role='staff';S.flow=null;go('home');toast('Αποσυνδέθηκες');return;
+ case'done':S.done[v]=true;render();toast('Έγινε');return;
+ case'goOrder':S.sup=v;go('order');return;
+ case'goSend':S.sup=v;S.comp[v]=true;go('order');return;
+ case'goCheck':S.check=true;S.cnt={};go('fridge');return;
+ case'openRcv':S.flow='rcv';S.rcv={sup:v,st:'idle'};render();window.scrollTo(0,0);return;
+ case'closeFlow':S.flow=null;break;
+ case'sup':S.sup=v;break;
+ case'toggleAll':S.showAll[S.sup]=!S.showAll[S.sup];break;
+ case'inc':S.adj[v]=qtyOf(v)+(PM[v].box||1);break;
+ case'dec':S.adj[v]=Math.max(0,qtyOf(v)-(PM[v].box||1));break;
+ case'reset':delete S.adj[v];break;
+ case'askApprove':S.ap[S.sup]={st:'pending',at:nowT()};render();toast('Στάλθηκε για έγκριση');return;
+ case'approve':S.ap[v]={st:'approved',at:nowT()};render();toast('Εγκρίθηκε. Το κατάστημα ειδοποιήθηκε');return;
+ case'changes':S.ap[v]={st:'changes',note:'κόψε λίγο τις ποσότητες',at:nowT()};render();toast('Στάλθηκε σημείωση στο κατάστημα');return;
+ case'compose':S.comp[S.sup]=true;render();window.scrollTo(0,0);return;
+ case'back':S.comp[S.sup]=false;break;
+ case'sent':S.ap[S.sup]={st:'sent',at:nowT()};S.comp[S.sup]=false;setTimeout(()=>{render();toast('Στάλθηκε')},300);return;
+ case'copy':(navigator.clipboard?navigator.clipboard.writeText(S.lastMsg):Promise.reject()).then(()=>toast('Αντιγράφηκε')).catch(()=>toast('Επίλεξε και αντίγραψε το κείμενο'));
+  S.ap[S.sup]={st:'sent',at:nowT()};S.comp[S.sup]=false;setTimeout(render,600);return;
+ case'cinc':S.cnt[v]=(S.cnt[v]??stockOf(v))+1;break;
+ case'cdec':S.cnt[v]=Math.max(0,(S.cnt[v]??stockOf(v))-1);break;
+ case'checkSave':{let fx=0;Object.entries(S.cnt).forEach(([id,c])=>{let d=c-stockOf(id);if(!d)return;fx++;const bs=S.b[id].sort((x,y)=>x.e-y.e);
+  if(d>0){if(bs.length)bs[bs.length-1].q+=d;else bs.push({e:PM[id].shelf-1,q:d})}else{for(const x of bs){const k=Math.min(x.q,-d);x.q-=k;d+=k;if(!d)break}S.b[id]=bs.filter(x=>x.q>0)}});
+  S.check=false;S.done.check=true;render();toast(fx?`Έτοιμο, ${fx} διορθώσεις`:'Όλα σωστά');return}
+ case'photo':$('#cam').click();return;
+ case'sample':startScan();return;
+ case'rinc':S.rcv.lines[v].q++;break;
+ case'rdec':S.rcv.lines[v].q=Math.max(0,S.rcv.lines[v].q-1);break;
+ case'rsave':{const s=S.rcv.sup,miss=[];S.rcv.lines.forEach(l=>{const p=PM[l.id];if(l.q<l.ord)miss.push(`${l.ord-l.q} ${p.n.toLowerCase()}`);if(!l.q)return;
+  if(per(p))S.b[p.id].push({e:p.shelf,q:l.q});else S.q[p.id]+=l.q*p.pack});
+  if(miss.length)S.alerts.push(`Παραλαβή ${SUP[s].name} (${S.rcv.no}): έλειπαν ${miss.join(', ')}. Έλεγξε ότι δεν θα χρεωθούν.`);
+  S.done['rcv-'+s]=true;S.flow=null;go('home');toast(miss.length?'Καταχωρήθηκε. Ο διαχειριστής ενημερώθηκε για ό,τι λείπει':'Η παραλαβή καταχωρήθηκε');return}
+ case'msgToggle':S.msgOpen=!S.msgOpen;break;
+ case'recToggle':S.recOpen=!S.recOpen;break;
+ case'openCalc':S.flow='calc';render();window.scrollTo(0,0);return;
+ case'cin':case'cde':{const f=CF.find(x=>x.k===v),c=S.calc;c[v]=Math.max(f.min,Math.min(f.max,Math.round((c[v]+(a==='cin'?f.st:-f.st))*100)/100));break}
+ }render()});
+$('#cam').addEventListener('change',e=>{if(e.target.files.length)startScan();e.target.value=''});
+render();
+if('serviceWorker' in navigator){window.addEventListener('load',()=>{navigator.serviceWorker.register('sw.js').catch(()=>{})})}
+</script>
+</body>
+</html>
